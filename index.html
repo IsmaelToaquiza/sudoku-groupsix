@@ -1,0 +1,986 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>SUDOKU</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-52746336-1"
+                  id="sudoku-groupsix"
+                  title="SUDOKU"
+                  environment="web"
+                  feedback-link="https://github.com/googlecodelabs/sudoku-groupsix/issues">
+    
+      <google-codelab-step label="Introducción" duration="0">
+        <p class="image-container"><img style="width: 378.38px" src="img\\2ab9f486dd1695a5.png"></p>
+<p><strong>Última actualización:</strong> 2022-08-14</p>
+<h2 is-upgraded><strong>¿Qué es y para qué sirve un Sudoku?</strong></h2>
+<p>Es un juego matemático cerebral. Para avanzar, se deben llenar las celdas con los números correspondientes de forma que no se repitan en una misma fila, columna o sub-celdas.</p>
+<h3 is-upgraded><strong>Estructura </strong></h3>
+<p>El sudoku se presenta normalmente como una tabla de 9 × 9, compuesta por subtablas de 3 × 3 denominadas &#34;regiones&#34; (también se le llaman &#34;cajas&#34; o &#34;bloques&#34;).</p>
+<p class="image-container"><img style="width: 480.00px" src="img\\6ad2fe304ebc9306.png"></p>
+<p>Algunas celdas ya contienen números, conocidos como &#34;números dados&#34; (o a veces &#34;pistas&#34;). El objetivo es rellenar las celdas vacías, con un número en cada una de ellas, de tal forma que cada columna, fila y región contenga los números 1–9 solo una vez.</p>
+<p>Además, cada número de la solución aparece solo una vez en cada una de las tres &#34;direcciones&#34;</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Preparación" duration="2">
+        <h2 is-upgraded><strong>¿Cuáles son los requisitos del sistema para Java?</strong></h2>
+<p>Se aplica a:</p>
+<ul>
+<li><strong>Versiones de Java:</strong> 8.0</li>
+</ul>
+<h3 is-upgraded><strong>Sistemas operativos y exploradores soportados</strong></h3>
+<h4 is-upgraded><strong>Windows</strong></h4>
+<ul>
+<li>Windows 10 (8u51 y superiores)</li>
+<li>Windows 8.x (escritorio)</li>
+<li>Windows 7 SP1</li>
+<li>Windows Vista SP2</li>
+<li>Windows Server 2008 R2 SP1 (64 bits)</li>
+<li>Windows Server 2012 y 2012 R2 (64 bits)</li>
+<li>RAM: 128 MB</li>
+<li>Espacio en disco: 124 MB para JRE; 2 MB para Java Update</li>
+<li>Procesador: Mínimo Pentium 2 a 266 MHz</li>
+<li>Exploradores: Internet Explorer 9 y superior, Firefox</li>
+</ul>
+<h4 is-upgraded><strong>Mac OS X</strong></h4>
+<ul>
+<li>Mac con Intel que ejecuta Mac OS X 10.8.3+, 10.9+</li>
+<li>Privilegios de administrador para la instalación</li>
+<li>Explorador de 64 bits</li>
+</ul>
+<h4 is-upgraded><strong>Linux</strong></h4>
+<ul>
+<li>Oracle Linux 5.5+1</li>
+<li>Oracle Linux 6.x (32 bits), 6.x (64 bits)2</li>
+<li>Oracle Linux 7.x (64 bits)2 (8u20 y superiores)</li>
+<li>Red Hat Enterprise Linux 5.5+1 6.x (32 bits), 6.x (64 bits)2</li>
+<li>Red Hat Enterprise Linux 7.x (64 bits)2 (8u20 y superiores)</li>
+<li>Suse Linux Enterprise Server 10 SP2+, 11.x</li>
+<li>Suse Linux Enterprise Server 12.x (64 bits)2 (8u31 y superiores)</li>
+<li>Ubuntu Linux 12.04 LTS, 13.x</li>
+<li>Ubuntu Linux 14.x (8u25 y superiores)</li>
+<li>Ubuntu Linux 15.04 (8u45 y superiores)</li>
+<li>Ubuntu Linux 15.10 (8u65 y superiores)</li>
+<li>Exploradores: Firefox</li>
+</ul>
+<h2 is-upgraded><strong>Instalación y configuración de Java y un entorno de desarrollo integrado (IDE)</strong></h2>
+<h3 is-upgraded><strong>Netbeans:</strong></h3>
+<p>NetBeans es un entorno de desarrollo integrado libre, hecho principalmente para Java aunque actualmente ofrece también soporte para muchos otros lenguajes.</p>
+<p><a href="https://netbeans.apache.org/download/index.html" target="_blank"><paper-button class="colored" raised>Descarga NetBeans</paper-button></a></p>
+<h3 is-upgraded>Instalación del JDK</h3>
+<p>El JDK (Java Development Kit) es el conjunto de librerías, paquetes, clases, métodos, etc. que posee Java, de este modo, es importante tenerlo instalado para poder desarrollar aplicaciones en Java.</p>
+<aside class="warning"><p><strong>Nota: </strong>En el enlace a continuación tendrás tres opciones para descargar, de todas estas debes seleccionar la primera que dice &#34;Java Platform (JDK)&#34;, que es la que necesitamos.</p>
+</aside>
+<p><a href="https://www.oracle.com/java/technologies/downloads/" target="_blank"><paper-button class="colored" raised>Descarga JDK</paper-button></a></p>
+<h3 is-upgraded><strong>Instalación de la máquina virtual</strong></h3>
+<p>La máquina virtual de Java, en términos sencillos, es la encargada de comprender lo que se escribe en código y hacerlo entendible para el computador, es un intérprete del código Java para el computador. </p>
+<aside class="warning"><p><strong>Nota: </strong>Es muy seguro que ya la tengas instalada, caso contrario , el enlace de descarga se encuentra a continuación.</p>
+</aside>
+<p><a href="https://www.java.com/es/download/" target="_blank"><paper-button class="colored" raised>Descarga máquina virtual</paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Construcción" duration="7">
+        <h2 is-upgraded>¿Cuál es nuestro punto de partida?</h2>
+<p>Un sudoku debe tener una única solución para que se considere bien planteado; es decir, a partir de las pistas iniciales sólo puede haber una forma válida de completar las casillas restantes. Para que un sudoku posea una única solución, es necesario que el número de pistas iniciales sea al menos 17.</p>
+<h2 is-upgraded><strong>GUISudoku</strong></h2>
+<h3 is-upgraded><strong>Librerías y paquetes</strong></h3>
+<p><strong><code>AWT :</code></strong> Permite hacer interfaces gráficas mediante artefactos de interacción con el usuario.</p>
+<p><strong><code>UTIL :</code></strong> Contiene un conjunto de interfaces como de clases de diversos tipos.</p>
+<h3 is-upgraded><strong>Definición de Variables</strong></h3>
+<ul>
+<li><strong><em>Almacenar elementos de forma dinámica </em></strong></li>
+</ul>
+<pre><code>ArrayList&lt;JTextField&gt; textos = new ArrayList();
+ArrayList&lt;Integer[][]&gt; posibleProblema=new ArrayList();
+ArrayList&lt;Integer&gt; numOcultos = new ArrayList();
+ArrayList&lt;Integer&gt; defecto = new ArrayList();</code></pre>
+<ul>
+<li><strong><em>Variables para definir el inicio y fin de una partida</em></strong></li>
+</ul>
+<pre><code>Boolean terminado = false;
+Boolean reiniciar = false;
+Boolean fin = false;</code></pre>
+<ul>
+<li><strong><em>Variable para conocer si se ha generado una tabla.</em></strong></li>
+</ul>
+<pre><code>Boolean sudokuGenerado = false; </code></pre>
+<ul>
+<li><strong><em>Variables auxiliares para conocer el estado de la partida.</em></strong></li>
+</ul>
+<pre><code>Boolean enProceso = false;
+Boolean Comprobar = false;
+Boolean contador = false;
+Boolean enEspera = false;
+Boolean autoguardado = false;
+Boolean tabla = false;
+Boolean salir = false;</code></pre>
+<ul>
+<li><strong><em>Variable para validar los datos incorrectos introducidos.</em></strong></li>
+</ul>
+<pre><code>Boolean datosIncorrectos = false; </code></pre>
+<ul>
+<li><strong><em>Variables definidas para cada bloque de la tabla del sudoku.</em></strong></li>
+</ul>
+<pre><code>Integer[] bloque1 = {0,1,2,9,10,11,18,19,20};
+Integer[] bloque2 = {3,4,5,12,13,14,21,22,23};
+Integer[] bloque3 = {6,7,8,15,16,17,24,25,26};
+Integer[] bloque4 = {27,28,29,36,37,38,45,46,47};
+Integer[] bloque5 = {30,31,32,39,40,41,48,49,50};
+Integer[] bloque6 = {33,34,35,42,43,44,51,52,53};
+Integer[] bloque7 = {54,55,56,63,64,65,72,73,74};
+Integer[] bloque8 = {57,58,59,66,67,68,75,76,77};
+Integer[] bloque9 = {60,61,62,69,70,71,78,79,80};</code></pre>
+<ul>
+<li><strong><em>Variables para los tipos de dificultad</em></strong></li>
+</ul>
+<pre><code>final int dificultadFacil = 35; 
+final int dificultadMedia = 30; 
+final int dificultadDificil = 25;</code></pre>
+<h3 is-upgraded><strong>Establecer el tamaño de la pantalla</strong></h3>
+<p>Obtiene el tamaño de la pantalla en la cual se esté ejecutando el programa</p>
+<pre><code>    super(&#34;SUDOKU&#34;);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    setResizable(false);
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    float prop = (float) 1366/500;
+    float tamf = screenSize.width / prop;
+    int tamaño = (int) Math.round(tamf);
+    float propx = (float) 1366/450;
+    float ejex = screenSize.width / propx;
+    int ejexf = (int) ejex;
+    float propy = (float) 768/100;
+    float ejey = screenSize.height / propy;
+    int ejeyf = (int) ejey;
+    setBounds(ejexf,ejeyf,tamaño,tamaño);</code></pre>
+<h3 is-upgraded><strong>Instanciar los botones del programa</strong></h3>
+<p>Establecer el posicionamiento de los componentes. Se crea con un número determinado de filas y columnas. Se instancia el <code>panel_central</code> y cada uno de los botones pertenecientes al juego, además, la personalización de los mismos.</p>
+<pre><code>   // Implementación de los 3 botones del juego
+    JPanel panel_central = new JPanel(new GridLayout(3,3,3,3));
+    panel_central.setBackground(Color.CYAN);
+
+    add(panel_central,BorderLayout.CENTER);
+    ArrayList&lt;JPanel&gt; paneles = new ArrayList();
+
+    for(int i = 0;i&lt;9;i++){
+        JPanel panel = new JPanel(new GridLayout(3,3));
+        panel.setBackground(Color.CYAN);
+        paneles.add(panel);
+        panel_central.add(panel);
+    }
+    
+    JButton generar = new JButton(&#34;Generar&#34;);
+    final JButton comprobar = new JButton(&#34;Comprobar solución&#34;);
+    JButton resolver = new JButton(&#34;Resolver&#34;);   </code></pre>
+<h3 is-upgraded><strong>Eventos por teclado</strong></h3>
+<p>La interfaz KeyListener permite recibir todos los eventos del teclado, siempre y cuando sean menor a las 81 celdas que tiene la tabla del sudoku. Esta interfaz posee tres métodos que necesariamente se tiene que implementar y son :</p>
+<aside class="special"><ul>
+<li>Este método se ejecuta cada vez que presionas una tecla.</li>
+</ul>
+<p><strong><code>public void keyPressed(KeyEvent e){</code></strong></p>
+<p><strong><code>}</code></strong></p>
+<ul>
+<li>Este método se ejecuta cada vez que sueltas una tecla.</li>
+</ul>
+<p><strong><code>public void keyReleased(KeyEvent e){</code></strong></p>
+<p><strong><code>}</code></strong></p>
+<ul>
+<li>Este método se ejecuta cada vez que se presiona y se suelta una tecla.</li>
+</ul>
+<p><strong><code>public void keyTyped(KeyEvent e){</code></strong></p>
+<p><strong><code>}</code></strong></p>
+</aside>
+<pre><code> for(int i = 0; i&lt;81;i++){
+        JTextField texto = new JTextField();
+        final int id = i;
+        texto.addKeyListener(new KeyListener (){
+                //Capturas de entrada por teclado
+            @Override
+            public void keyTyped(KeyEvent e) { Tecla (e,id); }
+
+            @Override
+            public void keyPressed(KeyEvent e) {}
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }                
+        });        </code></pre>
+<p>Establecer la proporción del tamaño de la letra en cada uno de los componentes, así como también, su tipografía. Además, se añaden los números a cada uno de los bloques, con el método <code>contains()</code>se verifica si contiene subcadenas cada bloque.</p>
+<pre><code>        float proporcion = (float) 500/30;
+        float tamañotexto = tamaño/proporcion;
+        int tamañofinal = (int) tamañotexto;
+        Font font1 = new Font(&#34;Segoe UI&#34;, Font.BOLD, tamañofinal);
+        texto.setFont(font1);
+        texto.setForeground(Color.BLACK);
+        texto.setPreferredSize(new Dimension(50,50));
+        texto.setHorizontalAlignment(SwingConstants.CENTER);
+        texto.setBorder(BorderFactory.createLineBorder(Color.gray));
+        textos.add(texto);
+         //Con el método contains() verificamos si contiene subcadenas cada bloque. 
+        if(Arrays.asList(bloque1).contains(i)) paneles.get(0).add(texto);
+        else if(Arrays.asList(bloque2).contains(i)) paneles.get(1).add(texto);
+        else if(Arrays.asList(bloque3).contains(i)) paneles.get(2).add(texto);
+        else if(Arrays.asList(bloque4).contains(i)) paneles.get(3).add(texto);
+        else if(Arrays.asList(bloque5).contains(i)) paneles.get(4).add(texto);
+        else if(Arrays.asList(bloque6).contains(i)) paneles.get(5).add(texto);
+        else if(Arrays.asList(bloque7).contains(i)) paneles.get(6).add(texto);
+        else if(Arrays.asList(bloque8).contains(i)) paneles.get(7).add(texto);
+        else if(Arrays.asList(bloque9).contains(i)) paneles.get(8).add(texto);
+    }
+ </code></pre>
+<p>Instanciar el <code>panel botones</code> y añadir cada uno de los botones. Seguidamente, especificar la personalización del diseño.</p>
+<pre><code> float proporcion = (float) 800/30;
+        float tamañotexto = tamaño/proporcion;
+        int tamañofinal = (int) tamañotexto;
+        Font font1 = new Font(&#34;Rockwell&#34;, Font.BOLD, tamañofinal);
+        // Se definen las dimensiones de la parte superior de los botones
+    JPanel panel_botones = new JPanel(new GridLayout(1,3,3,3)); 
+    // Diseño y color de los botones.
+    add(panel_botones,BorderLayout.NORTH);
+    panel_botones.setBackground(Color.CYAN);
+    panel_botones.add(generar);
+    generar.setBackground(Color.CYAN);
+    generar.setFont(font1);
+    panel_botones.add(comprobar);
+    comprobar.setBackground(Color.CYAN);
+    comprobar.setFont(font1);
+    panel_botones.add(resolver);
+    resolver.setBackground(Color.CYAN);
+    resolver.setFont(font1);
+      </code></pre>
+<h3 is-upgraded><strong>Botón generar</strong></h3>
+<p>Si el botón <code>generar</code> se ha presionado se mostrará en pantalla los tres tipos de dificultad que se han establecido para el sudoku <code>fácil, medio y difícil.</code></p>
+<p>Para cada una de las opciones se mostrará una nueva tabla con números predefinidos para que exista una única solución del sudoku, caso contrario, si se desea mantener en la misma partida, la tabla con los números que se hayan ingresado previamente permanecerá intacta.</p>
+<pre><code>    generar.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Se establecen los tipos de dificultad que existen
+            Boolean cancelado = false;
+            String[] options = new String[] {&#34;Fácil&#34;, &#34;Media&#34;, &#34;Difícil&#34;};
+            JLabel etiqueta = new JLabel(&#34;Tipos de dificultad:&#34;, JLabel.CENTER);
+            int response = JOptionPane.showOptionDialog(null,etiqueta, 
+                           &#34;Dificultad&#34;,JOptionPane.DEFAULT_OPTION, 
+                            JOptionPane.PLAIN_MESSAGE,
+                            null, options, options[0]);
+            switch(response){
+                // Cada opción corresponde al tipo que existe
+                case 0:
+                    limiteCeldas = dificultadFacil;
+                    break;
+                case 1:
+                    limiteCeldas = dificultadMedia;
+                    break;
+                case 2:
+                    limiteCeldas = dificultadDificil;
+                    break;
+                default:
+                    cancelado = true;
+                    break;
+            }
+            if(!cancelado){
+                /* Si se cancela la selección del tipo de dificultad la tabla 
+                se mantiene con las celdas que se hayan ingresado hasta el momento*/
+                autoguardado = false;  //Se guardan previamente las celdas ingresadas
+                defecto.clear();
+                enProceso = true;
+                Comprobar = true;
+                Integer[][] problema = new Integer[9][9]; // Contrucción de la tabla
+                // Se itera por cada una de las celdas de la tabla
+                for(int i =0;i&lt;81;i++){
+                    textos.get(i).setForeground(Color.BLACK);
+                    textos.get(i).setBackground(Color.WHITE);
+                    textos.get(i).setEnabled(true);
+                }
+                // Control sobre la ejecución si se selecciona un tipo de dificultad
+                primeraCelda = -1;
+                terminado = false;
+                ejecucion = 0;
+                enEspera = true;
+                Tiempo();
+                segundos = 0;
+                /* Si se selecciona el tipo de dificultad, y existen números ingresados 
+                todos se van a limpiar y se mostrará una nueva tabla*/
+                while(enProceso){                    
+                    contador = true;
+                    atras = 0;
+                    numOcultos.clear();
+                    posibleProblema.clear();
+                    fin = false;
+                    soluciones = 0;
+                    for(int x = 0;x&lt;9;x++){
+                        for(int y = 0;y&lt;9;y++){
+                            problema[x][y]=0;
+                        }
+                    }
+                    generarSudoku(0,problema);
+                }  
+            }
+        }
+    });      </code></pre>
+<h3 is-upgraded><strong>Botón Resolver</strong></h3>
+<p>Si el botón <code>resolver</code> se ha presionado se mostrará en pantalla las dos opciones <code>resolver</code> y <code>cancelar.</code></p>
+<p>Si se establece la opción <code>resolver</code> se iterará por cada celda de la tabla y se incluirán los números correspondientes a la partida, dependiendo del nivel que se haya seleccionado. Para esta parte se utilizará el <code>método sbt. </code></p>
+<p>Una vez que el <code>sudoku</code> se encuentre resuelto, si se desea generar una segunda solución, aparecerá un mensaje en pantalla indicando que no existe otra solución.</p>
+<pre><code>resolver.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            terminado = false;
+            Comprobar = false;
+            soluciones = 0;
+            celdas = 0;
+            primeraCelda = -1;
+            if(sudokuGenerado){
+                //Opción para resolver el sudoku
+                String[] options = new String[] {&#34;Cancelar&#34;, &#34;Resolver&#34;};
+                JLabel etiqueta = new JLabel(&#34;¿Desea resolver el sudoku?&#34;, JLabel.CENTER);
+                int response = JOptionPane.showOptionDialog(null, etiqueta, &#34;Resolver&#34;,
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    null, options, options[0]);
+                switch(response){
+                    case 1:
+                        /* Se itera por cada celda de la tabla y se rellena cada 
+                        casilla con el número correspondiente en color rojo.*/
+                        for (int x = 0; x &lt; 81; x++){
+                            if(!defecto.contains(x)){
+                                input[x/9][x%9] = 0;
+                                textos.get(x).setEnabled(false);
+                                textos.get(x).setDisabledTextColor(Color.RED);
+                                textos.get(x).setBackground(Color.WHITE);
+                            }
+                        }
+                        sbt(0,input);
+                        sudokuGenerado = false;
+                        ejecuciont = 0;
+                        Save s = new Save();
+                        s.escribir(&#34;&#34;);
+                        break;
+                    default:
+                        break;
+                    }
+            }
+            else JOptionPane.showMessageDialog(null, &#34;La solución ya ha sido generada.&#34;,
+                    &#34;Error&#34;,JOptionPane.INFORMATION_MESSAGE);
+            }
+    });</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Construcción (continuación)" duration="5">
+        <h2 is-upgraded><strong>Métodos complementarios</strong></h2>
+<h3 is-upgraded><strong>Definición de métodos</strong></h3>
+<ul>
+<li><strong><em>Método sbt</em></strong></li>
+</ul>
+<p>Recibe por parámetros <em><code>puestas</code></em> que hace referencia a los valores digitados por el computador; <em><code>sol</code></em> que son la cantidad de soluciones que existen, analizadas para revisar la cantidad de posibles resultados.</p>
+<pre><code>    /**
+     * Método enfocado en el btn comprobar para mostrar un mensaje de dialogo
+     * con la cantidad de posibles soluciones dependiendo de como esté llena la
+     * tabla
+     */
+    private void sbt(int puestas, Integer[][] sol) {
+        if (puestas == 81 &amp;&amp; !terminado) {
+            soluciones++;
+            if (soluciones &gt; 1 &amp;&amp; enProceso) {
+                terminado = true;
+            }
+            if (soluciones &gt; 100 &amp;&amp; !enProceso) {
+                terminado = true;
+                JOptionPane.showMessageDialog(null,
+                        &#34;Número de soluciones: más de 100\nNúmero de celdas: &#34; + celdas,
+                        &#34;Mensaje&#34;, JOptionPane.INFORMATION_MESSAGE);
+            }
+            if (!Comprobar) {
+                setText(sol);
+            }
+        } else if (sol[puestas / 9][puestas % 9] == 0) {
+            for (int c = 1; c &lt;= 9 &amp;&amp; !terminado; c++) {
+                sol[puestas / 9][puestas % 9] = c;
+                if (factible(puestas, sol)) {
+                    sbt(puestas + 1, sol);
+                }
+            }
+            sol[puestas / 9][puestas % 9] = 0;
+            if (primeraCelda == puestas &amp;&amp; !terminado) {
+                if (soluciones == 0) {
+                    sinSolucion();
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            &#34;Número de soluciones: &#34; + soluciones + &#34;\nNúmero de celdas: &#34; + celdas,
+                            &#34;Mensaje&#34;, JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } else {
+            sbt(puestas + 1, sol);
+        }
+    }</code></pre>
+<ul>
+<li><strong><em>Método factible</em></strong></li>
+</ul>
+<p>Recibe por parámetros <em><code>puestas</code></em> que hace referencia a los valores digitados por el computador; <em><code>solucionF</code></em> que son las soluciones que existen, analizadas en función de los valores ingresados.</p>
+<pre><code>    /**
+     * Método que verifica si es posible resolver
+     */
+    private Boolean factible(int puestas, Integer[][] solucionF) {
+        //Se creal indice para verificar si se puede resolver
+        int x = puestas / 9;
+        int y = puestas % 9;
+        for (int i = 0; i &lt; 9; i++) {
+            if (solucionF[x][y] == solucionF[x][i] &amp;&amp; y != i) {
+                return false;
+            }
+            if (solucionF[x][y] == solucionF[i][y] &amp;&amp; x != i) {
+                return false;
+            }
+        }
+        while (x % 3 != 0) {
+            x--;
+        }
+        while (y % 3 != 0) {
+            y--;
+        }
+
+        for (int i = x; i &lt; x + 3; i++) {
+            for (int j = y; j &lt; y + 3; j++) {
+                if ((i != puestas / 9) &amp;&amp; (j != puestas % 9)) {
+                    if (solucionF[puestas / 9][puestas % 9] == solucionF[i][j]) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }</code></pre>
+<ul>
+<li><strong><em>Método setText</em></strong></li>
+</ul>
+<p>Recibe por parámetro <em><code>sol</code></em> que son las soluciones que existen, analizadas en función de los valores ingresados.</p>
+<pre><code>    //Método auxiliar para cambiar la informacion de un valor para la solución
+
+    private void setText(Integer[][] sol) {
+        Comprobar = false;
+        terminado = true;
+        int i = 0;
+        for (int x = 0; x &lt; 9; x++) {
+            for (int y = 0; y &lt; 9; y++) {
+                textos.get(i).setText(String.valueOf(sol[x][y]));
+                i++;
+            }
+        }
+    }</code></pre>
+<ul>
+<li><strong><em>Método comprobacion</em></strong></li>
+</ul>
+<p>Recibe por parámetro  <em><code>escritas</code></em> que son los datos que se encuentran en la interfaz una vez se presiona  el botón de comprobación.</p>
+<pre><code>//Comprueba el dato que se está dentro de la interfaz
+    private Boolean comprobacion(Integer[][] escritas) {
+        //toma las casillas verificando que sean menos de 81
+        for (int a = 0; a &lt; 81; a++) {
+            int x = a / 9;
+            int y = a % 9;
+            /*comprueba la repetición de un número en fila, clumna o casillas*/
+            if (escritas[x][y] != 0) {
+                for (int i = 0; i &lt; 9; i++) {
+                    if (escritas[x][y] == escritas[x][i] &amp;&amp; y != i) {
+                        if (!defecto.contains(a)) {
+                            textos.get(a).setBackground(Color.YELLOW);
+                            return false;
+                        }
+                    }
+                    if (escritas[x][y] == escritas[i][y] &amp;&amp; x != i) {
+                        if (!defecto.contains(a)) {
+                            textos.get(a).setBackground(Color.YELLOW);
+                            return false;
+                        }
+                    }
+                }
+                while (x % 3 != 0) {
+                    x--;
+                }
+                while (y % 3 != 0) {
+                    y--;
+                }
+
+                for (int i = x; i &lt; x + 3; i++) {
+                    for (int j = y; j &lt; y + 3; j++) {
+                        if ((i != a / 9) &amp;&amp; (j != a % 9)) {
+                            if (escritas[a / 9][a % 9] == escritas[i][j]) {
+                                if (!defecto.contains(a)) {
+                                    textos.get(a).setBackground(Color.YELLOW);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            textos.get(a).setBackground(Color.WHITE);
+        }
+        return true;
+    }
+
+    }</code></pre>
+<ul>
+<li><strong><em>Método sinSolucion</em></strong></li>
+</ul>
+<p>No recibe parámetros de entrada.</p>
+<pre><code>    //Método que nos muestra si un sudoku no tiene respuesta
+
+    private void sinSolucion() {
+        primeraCelda = -1;
+        JOptionPane.showMessageDialog(null, &#34;El sudoku no tiene solución.&#34;, &#34;Mensaje&#34;, JOptionPane.INFORMATION_MESSAGE);
+        for (int x = 0; x &lt; 81; x++) {
+            textos.get(x).setForeground(Color.BLACK);
+            textos.get(x).setEnabled(true);
+        }
+    }</code></pre>
+<ul>
+<li><strong><em>Método generarSudoku</em></strong></li>
+</ul>
+<p>Recibe por parámetros <em><code>puestas</code></em> que hace referencia a los valores digitados por el computador; <em><code>problema</code></em> que es donde se guardarán los valores previos considerando su posición.</p>
+<pre><code>    //Método para generar el sudoku 
+
+    private void generarSudoku(int puestas, Integer[][] problema) {
+        //Con todos los datos colocalos busca la respuesta de lo contrario revisa si es factible
+        if (puestas == 81) {
+            fin = true;
+            Integer[] ocultos = new Integer[81];
+            Contador();
+            prepararSolución(problema, ocultos, 80);
+        } else {
+            Random p = new Random();
+            int r = p.nextInt(9) + 1;
+            for (int i = 0; i &lt; 9 &amp;&amp; !fin; i++) {
+                if (i + r &gt; 9) {
+                    r = i + r - 9;
+                } else {
+                    r = i + r;
+                }
+                problema[puestas / 9][puestas % 9] = r;
+                if (factible(puestas, problema)) {
+                    generarSudoku(puestas + 1, problema);
+                }
+            }
+            problema[puestas / 9][puestas % 9] = 0;
+        }
+    }</code></pre>
+<ul>
+<li><strong><em>Método mostrarSolución</em></strong></li>
+</ul>
+<p>Recibe por parámetro <em><code>problemaFinal</code></em> referenciando al problema que se creó al generar el sudoku.</p>
+<pre><code>  //Método auxiliar para la solución
+    private void mostrarSolucion(Integer[][] problemaFinal) {
+        sudokuGenerado = true;
+        int i = 0;
+        String pordefecto = &#34;&#34;;
+        String valores = &#34;&#34;;
+
+        for (int x = 0; x &lt; 9; x++) {
+            for (int y = 0; y &lt; 9; y++) {
+                if (problemaFinal[x][y] == 0) {
+                    textos.get(i).setText(&#34;&#34;);
+                    textos.get(i).setForeground(Color.RED);
+                    textos.get(i).setDisabledTextColor(Color.RED);
+                } else {
+                    textos.get(i).setText(String.valueOf(problemaFinal[x][y]));
+                    textos.get(i).setEnabled(false);
+                    textos.get(i).setDisabledTextColor(Color.BLACK);
+                    defecto.add(i);
+                    pordefecto += i + &#34;;&#34;;
+                    valores += String.valueOf(problemaFinal[x][y]) + &#34;;&#34;;
+                }
+                i++;
+            }
+        }
+        Save s = new Save();
+        s.escribir(pordefecto + &#34;\n&#34; + valores);
+        autoguardado = true;
+        seconds = 0;
+        Autoguardado();
+        comprobarDatoIncorrecto(); //Para guardar el input sudokuGenerado
+    }</code></pre>
+<ul>
+<li><strong><em>Método prepararSolución</em></strong></li>
+</ul>
+<p>Recibe por parámetros <em><code>problema</code></em> referenciando al problema que se creó al generar el sudoku; <em><code>ocultos</code></em> para valores de la solución al igual que <em><code>restantes</code></em> que son los datos que faltan por ingresar. </p>
+<pre><code>      private void prepararSolución(Integer[][] problema, Integer[] ocultos, int restantes) {
+        for (int x = 0; x &lt; 10 &amp;&amp; enProceso &amp;&amp; atras &lt;= 500 &amp;&amp; contador; x++) {
+            int r;
+            Random p = new Random();
+            do {
+                r = p.nextInt(81);
+            } while (Arrays.asList(ocultos).contains(r));
+            int cambio = problema[r / 9][r % 9];
+            problema[r / 9][r % 9] = 0;
+            soluciones = 0;
+            terminado = false;
+            ocultos[81 - restantes] = r;
+            sbt(0, problema);
+            if (soluciones == 1 &amp;&amp; restantes &gt; limiteCeldas) {
+                prepararSolución(problema, ocultos, restantes - 1);
+            } else if (soluciones == 1 &amp;&amp; restantes &lt;= limiteCeldas) {
+                enEspera = false;
+                enProceso = false;
+                mostrarSolucion(problema);
+            }
+            problema[r / 9][r % 9] = cambio;
+            ocultos[81 - restantes] = null;
+            atras++;
+        }
+    }</code></pre>
+<ul>
+<li><strong><em>Método Contador</em></strong></li>
+</ul>
+<p>No recibe parámetros de entrada.</p>
+<pre><code>          private void Contador() {
+        Runnable r = new Runnable() {
+            int hilo;
+
+            @Override
+            public void run() {
+                hilo = ejecucion;
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ex) {
+                }
+                if (ejecucion == hilo) {
+                    contador = false;
+                }
+            }
+        };
+        ejecucion++;
+        Thread thread = new Thread(r);
+        thread.start();
+    }</code></pre>
+<ul>
+<li><strong><em>Método Tiempo</em></strong></li>
+</ul>
+<p>No recibe parámetros de entrada.</p>
+<pre><code> private void Tiempo() {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                while (enEspera) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception ex) {
+                    }
+                    segundos++;
+                }
+            }
+        };
+        Thread thread = new Thread(r);
+        thread.start();
+    }</code></pre>
+<ul>
+<li><strong><em>Método Autoguardado</em></strong></li>
+</ul>
+<p>No recibe parámetros de entrada.</p>
+<pre><code>    private void Autoguardado() {
+        Runnable r = new Runnable() {
+            int hilo;
+
+            @Override
+            public void run() {
+                hilo = ejecuciont;
+                while (hilo == ejecuciont) {
+                    for (int z = 0; z &lt; 60 &amp;&amp; hilo == ejecuciont; z++) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (Exception ex) {
+                        }
+                        if (hilo == ejecuciont) {
+                            seconds++;
+                        }
+                    }
+                    if (hilo == ejecuciont) {
+                        String temp = &#34;&#34;;
+                        Save sv = new Save();
+                        temp = sv.leer();
+                        ArrayList&lt;Integer&gt; vindice = new ArrayList();
+                        StringTokenizer st = new StringTokenizer(temp, &#34;;&#34;);
+                        Boolean lectura = true;
+                        while (lectura) {
+                            try {
+                                vindice.add(Integer.parseInt(st.nextToken()));
+                            } catch (Exception e) {
+                                lectura = false;
+                            }
+                        }
+                        temp += &#34;\n&#34; + sv.leer() + &#34;\n&#34;;
+                        String uindice = &#34;&#34;;
+                        String unumero = &#34;&#34;;
+                        for (int x = 0; x &lt; 81; x++) {
+                            if (!vindice.contains(x) &amp;&amp; !(textos.get(x).getText()).equals(&#34;&#34;)) {
+                                uindice += String.valueOf(x) + &#34;;&#34;;
+                                unumero += textos.get(x).getText() + &#34;;&#34;;
+                            }
+                        }
+                        sv.escribir(temp + uindice + &#34;\n&#34; + unumero + &#34;\n&#34; + seconds);
+                    }
+                }
+            }
+        };
+        ejecuciont++;
+        Thread thread = new Thread(r);
+        thread.start();
+    }</code></pre>
+<ul>
+<li><strong><em>Método Cargar</em></strong></li>
+</ul>
+<p>No recibe parámetros de entrada.</p>
+<pre><code>private void Cargar() {
+        Save save = new Save();
+        Save comprobador = new Save();
+        String firstline = &#34;&#34;;
+        Boolean lectura = true;
+        firstline = comprobador.leer();
+        if (firstline != null) {
+            if (!firstline.equals(&#34;&#34;)) {
+                //Hay un sudoku guardado
+                sudokuGenerado = true;
+                autoguardado = true;
+                Autoguardado();
+                String indice = save.leer();
+                String numeros = save.leer();
+                String userindex = save.leer();
+                String usernumber = save.leer();
+                try {
+                    seconds = Integer.parseInt(save.leer());
+                } catch (Exception e) {
+                }
+                ArrayList&lt;Integer&gt; vindice = new ArrayList();
+                ArrayList&lt;String&gt; vnumeros = new ArrayList();
+                StringTokenizer st = new StringTokenizer(indice, &#34;;&#34;);
+                StringTokenizer st2 = new StringTokenizer(numeros, &#34;;&#34;);
+                while (lectura) {
+                    try {
+                        vindice.add(Integer.parseInt(st.nextToken()));
+                        vnumeros.add(st2.nextToken());
+                    } catch (Exception e) {
+                        lectura = false;
+                    }
+                }
+                lectura = true;
+                for (int x = 0; x &lt; vindice.size(); x++) {
+                    textos.get(vindice.get(x)).setText(vnumeros.get(x));
+                    textos.get(vindice.get(x)).setEnabled(false);
+                    textos.get(vindice.get(x)).setDisabledTextColor(Color.BLACK);
+                    defecto.add(vindice.get(x));
+                }
+                for (int x = 0; x &lt; 81; x++) {
+                    if (!vindice.contains(x)) {
+                        textos.get(x).setForeground(Color.RED);
+                        textos.get(x).setDisabledTextColor(Color.RED);
+                    }
+                }
+                try {
+                    StringTokenizer st3 = new StringTokenizer(userindex, &#34;;&#34;);
+                    StringTokenizer st4 = new StringTokenizer(usernumber, &#34;;&#34;);
+                    ArrayList&lt;Integer&gt; uindice = new ArrayList();
+                    ArrayList&lt;String&gt; unumeros = new ArrayList();
+                    while (lectura) {
+                        try {
+                            uindice.add(Integer.parseInt(st3.nextToken()));
+                            unumeros.add(st4.nextToken());
+                        } catch (Exception e) {
+                            lectura = false;
+                        }
+                        for (int x = 0; x &lt; uindice.size(); x++) {
+                            textos.get(uindice.get(x)).setText(unumeros.get(x));
+                        }
+                    }
+                } catch (Exception e) {
+                }
+            }
+        }
+        comprobarDatoIncorrecto();
+    }</code></pre>
+<ul>
+<li><strong><em>Método Tecla</em></strong></li>
+</ul>
+<p>Recibe por parámetros <em><code>e</code></em> para un evento de una tecla; <em><code>id</code></em> para valores que entran.</p>
+<pre><code>    private void Tecla(KeyEvent e, int id) {
+        char letra = e.getKeyChar();
+        int number = Character.getNumericValue(letra);
+
+        if (number &gt; 0 &amp;&amp; number &lt; 10) {
+            if (textos.get(id).getText().length() == 1) {
+                e.consume(); //Para no escribir números con más de una cifra
+            } else {
+                comprobarDatoIncorrecto(); //Se ha introducido el valor correcto
+            }
+        } else if (letra != KeyEvent.VK_BACK_SPACE) {
+            e.consume(); //No se ha introducido el valor correcto
+        } else {
+            comprobarDatoIncorrecto(); //Se ha pulsado tecla retroceso
+        }
+    }</code></pre>
+<ul>
+<li><strong><em>Método comprobarDatoIncorrecto</em></strong></li>
+</ul>
+<p>No recibe parámetros de entrada.</p>
+<pre><code>    /**
+     * Esta función permite Comprobar cada vez que se le llama si se ha
+     * introducido un dato incorrecto
+     */
+    private void comprobarDatoIncorrecto() {
+        Runnable r = new Runnable() {
+            Boolean correcto = true;
+
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(10); //Este sleep sirve para manejar un extraño error de concurrencia
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GUISudoku.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                /*Cambia los colores de fondo de los cuadros de texto para poder ingresar
+            y bloquea la edicion de las casillas*/
+                datosIncorrectos = false;
+                for (int x = 0; x &lt; 81; x++) {
+                    if (textos.get(x).getText().equals(&#34;&#34;)) {
+                        input[x / 9][x % 9] = 0;
+                        correcto = false;
+                    } else {
+                        input[x / 9][x % 9] = Integer.parseInt(textos.get(x).getText());
+                    }
+                }
+                for (int a = 0; a &lt; 81; a++) {
+                    Boolean error = false;
+                    int x = a / 9;
+                    int y = a % 9;
+                    if (input[x][y] != 0) {
+                        for (int i = 0; i &lt; 9; i++) {
+                            if (input[x][y] == input[x][i] &amp;&amp; y != i) {
+                                if (!defecto.contains(a)) {
+                                    textos.get(a).setBackground(Color.YELLOW);
+                                    correcto = false;
+                                    error = true;
+                                    datosIncorrectos = true;
+                                }
+                            }
+                            if (input[x][y] == input[i][y] &amp;&amp; x != i) {
+                                if (!defecto.contains(a)) {
+                                    textos.get(a).setBackground(Color.YELLOW);
+                                    correcto = false;
+                                    error = true;
+                                    datosIncorrectos = true;
+                                }
+                            }
+                        }
+                        while (x % 3 != 0) {
+                            x--;
+                        }
+                        while (y % 3 != 0) {
+                            y--;
+                        }
+
+                        for (int i = x; i &lt; x + 3; i++) {
+                            for (int j = y; j &lt; y + 3; j++) {
+                                if ((i != a / 9) &amp;&amp; (j != a % 9)) {
+                                    if (input[a / 9][a % 9] == input[i][j]) {
+                                        if (!defecto.contains(a)) {
+                                            textos.get(a).setBackground(Color.YELLOW);
+                                            correcto = false;
+                                            error = true;
+                                            datosIncorrectos = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!error) {
+                        textos.get(a).setBackground(Color.WHITE);
+                    }
+                }
+                if (correcto) {
+                    //Sudoku resuelto
+                    sudokuGenerado = false;
+                    int min = seconds / 60;
+                    int sec = seconds % 60;
+                    ejecuciont = 0;
+                    for (int x = 0; x &lt; 81; x++) {
+                        input[x / 9][x % 9] = 0;
+                    }
+                    JOptionPane.showMessageDialog(null,
+                            &#34;¡BIEN HECHO! El sudoku se ha resuelto con éxito&#34;
+                            + &#34;\nen &#34; + min + &#34; minutos y &#34; + sec + &#34; segundos.&#34;,
+                            &#34;Resuelto&#34;, JOptionPane.INFORMATION_MESSAGE);
+                    Save s = new Save();
+                    s.escribir(&#34;&#34;);
+                }
+            }
+        };
+        Thread thread = new Thread(r);
+        thread.start();
+    }</code></pre>
+<h2 is-upgraded><strong>Reference docs</strong></h2>
+<ul>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/" target="_blank">https://docs.oracle.com/javase/7/docs/api/</a> </li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Manual de Usuario" duration="3">
+        <h3 is-upgraded><strong>Instrucciones de uso</strong></h3>
+<p>En el archivo <code>.rar</code> se adjunta dos archivos:</p>
+<ul>
+<li> El primero es el proyecto que se debe compilar en la aplicación Netbeans de preferencia con el JDK17 para evitar conflictos de versiones.</li>
+<li>El segundo archivo adjunto es un ejecutable <code>.jar</code> que permite la ejecución de forma directa del programa sin necesidad de acceder por medio de un IDE.</li>
+</ul>
+<h3 is-upgraded><strong>Importar el proyecto</strong></h3>
+<p>Importar el proyecto en el IDE NetBeans. </p>
+<p class="image-container"><img style="width: 401.00px" src="img\\379b6035866716e.png"></p>
+<h3 is-upgraded><strong>Clean and build</strong></h3>
+<p>Para el uso del programa desde el IDE NetBeans es necesario realizar un <code>‘clean and build'</code> de todo el proyecto para evitar errores al compilarse.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\39b39870c24a9a5.png"></p>
+<h3 is-upgraded><strong>Ejecución</strong></h3>
+<p>Seguidamente, se ejecuta el programa en el <code>paquete Algoritmo</code> en <code>Inicio</code> y se abrirá la ventana con un botón que permite el acceso al juego.</p>
+<p class="image-container"><img style="width: 316.00px" src="img\\d790ff7afba6cb66.png"></p>
+<h3 is-upgraded><strong>Programa</strong></h3>
+<p>Para acceder al juego, se tiene que presionar el botón <code>SUDOKU</code> y automáticamente se refleja una ventana con la tabla principal del juego.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\4eecb06b07110b69.png"></p>
+<p>Para generar una nueva tabla, nos dirigimos a la fila de botones ubicados en la parte superior y seleccionamos <code>generar</code>, en donde podemos seleccionar el tipo de dificultad que deseemos. </p>
+<p>Si deseamos observar la solución final del sudoku, nos dirigimos al botón <code>resolver</code> y automáticamente podremos observar la única solución que se obtiene para esa partida.</p>
+<p class="image-container"><img style="width: 481.00px" src="img\\9d0dc97cf706bdea.png"></p>
+<p>Por si requieren instrucciones de cómo se juega a sudoku a continuación se muestran las reglas para principiantes :</p>
+<p><a href="https://sudoku.com/es/como-jugar/reglas-de-sudoku-para-principiantes/" target="_blank"><paper-button class="colored" raised>Reglas del SUDOKU</paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

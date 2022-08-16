@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-08-16T04:46:18Z",
+  "id": "sudoku-groupsix",
+  "duration": 17,
+  "title": "SUDOKU",
+  "authors": "Gabriela Manobanda, Ismael Toaquiza",
+  "summary": "In this codelab, you'll build an installable, Progressive Web App, which loads quickly, even on flaky networks, and when launched looks like any other installed app.",
+  "source": "13X7GPx3jRhOxUjC16K_1PpV5gBG1k_EufWx_JMmjr8g",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "web"
+  ],
+  "tags": [
+    "java"
+  ],
+  "feedback": "https://github.com/googlecodelabs/sudoku-groupsix/issues",
+  "ga": "UA-52746336-1",
+  "url": "sudoku-groupsix"
+}
